@@ -1,7 +1,5 @@
 #!/bin/bash
-
 set -euo pipefail
-
 
 ORIGINAL_POSTGRES_HOST="prod-postgres-tourism-2.co90ybcr8iim.eu-west-1.rds.amazonaws.com"
 ORIGINAL_POSTGRES_USERNAME="pmoser"

@@ -33,6 +33,8 @@ pipeline {
         FLYWAY_PLACEHOLDERS_SUBSCRIPTION_NAME = "tourism_test_subscription"
         FLYWAY_PLACEHOLDERS_PUBLICATION_NAME = "vkgpublication"
         FLYWAY_PLACEHOLDERS_COPY_USER_READONLY = "${COPY_POSTGRES_USER_READONLY}"
+
+        ONTOP_FLYWAY_MIGRATION_PATH = "/opt/ontop/sql/tourism"
     }
 
     stages {
@@ -62,6 +64,8 @@ pipeline {
                     echo "FLYWAY_PLACEHOLDERS_SUBSCRIPTION_NAME=${FLYWAY_PLACEHOLDERS_SUBSCRIPTION_NAME}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_PUBLICATION_NAME=${FLYWAY_PLACEHOLDERS_PUBLICATION_NAME}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_COPY_USER_READONLY=${FLYWAY_PLACEHOLDERS_COPY_USER_READONLY}" >> .env
+
+                    echo "ONTOP_FLYWAY_MIGRATION_PATH=${ONTOP_FLYWAY_MIGRATION_PATH}" >> .env
 
                     sed -i -e "s%\\(jdbc.url\\s*=\\).*\\$%\\1jdbc\\\\\\\\:postgresql\\\\\\\\://${COPY_POSTGRES_HOST}/${COPY_POSTGRES_DB}%" vkg/odh.docker.properties
                     sed -i -e "s%\\(jdbc.user\\s*=\\).*\\$%\\1${COPY_POSTGRES_USER_READONLY}%" vkg/odh.docker.properties
