@@ -5,7 +5,7 @@
 -- Please use the script infrastructure/utils/originaldb-dump-schema.sh to update this dump
 --
 
-SELECT pg_catalog.set_config('search_path', '', false);
+SELECT pg_catalog.set_config('search_path', '${tourism_schema_vkg}', false);
 CREATE TABLE "AspNetRoles" (
     "Id" character varying(128) NOT NULL,
     "Name" character varying(256) NOT NULL
