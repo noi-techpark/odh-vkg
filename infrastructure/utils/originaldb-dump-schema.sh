@@ -1,12 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
-ORIGINAL_POSTGRES_HOST="test-pg-bdp.co90ybcr8iim.eu-west-1.rds.amazonaws.com"
-ORIGINAL_POSTGRES_USERNAME="pmoser"
-ORIGINAL_POSTGRES_DB="bdp"
-ORIGINAL_POSTGRES_SCHEMA="intimev2"
-ODH_DOMAIN="mobility"
-OUTPUT="../../sql/V6__mobility_initial_setup.sql"
+ODH_DOMAIN="$1"
+ORIGINAL_POSTGRES_HOST="$2"
+ORIGINAL_POSTGRES_DB="$3"
+ORIGINAL_POSTGRES_SCHEMA="$4"
+ORIGINAL_POSTGRES_USERNAME="$5"
+OUTPUT="$6"
 
 TMP_FILE="orig-database-$ODH_DOMAIN-schemadump.sql"
 
@@ -35,7 +35,7 @@ pg_dump \
     grep -v -e '^SET .*$' | \
     grep -v -E 'll_to_earth' | \
     sed -z -e "s#)\nWITH (autovacuum_analyze_threshold='2E9'##g" | \
-    sed -e "s/$ORIGINAL_POSTGRES_SCHEMA\.//g" | \
+    sed -e "s/$ORIGINAL_POSTGRES_SCHEMA\./\$\{${ODH_DOMAIN}_schema_vkg\}\./g" | \
     grep -v -E '^(CREATE\ EXTENSION|COMMENT\ ON\ EXTENSION|CREATE\ SCHEMA)' | \
     grep -v -e '^--.*$' | \
     grep -v -e '^[[:space:]]*$' >> "$TMP_FILE"

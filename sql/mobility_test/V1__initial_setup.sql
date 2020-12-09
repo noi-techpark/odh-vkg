@@ -5,7 +5,7 @@
 -- Please use the script infrastructure/utils/originaldb-dump-schema.sh to update this dump
 --
 
-SELECT pg_catalog.set_config('search_path', '${mobility_schema_vkg}', false);
+SELECT pg_catalog.set_config('search_path', '', false);
 CREATE SEQUENCE measurementhistory_seq
     START WITH 1
     INCREMENT BY 1
