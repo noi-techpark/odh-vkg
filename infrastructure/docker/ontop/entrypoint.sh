@@ -7,7 +7,7 @@ for file in /opt/ontop/sql/*; do
     if [ -d "$file" ]; then
         dir=$(basename "$file")
         echo "# Migrating schema '$dir'."
-        /usr/local/bin/flyway -locations=filesystem:"/opt/ontop/sql/$dir" -schemas="$dir" migrate
+        /usr/local/bin/flyway -X -locations=filesystem:"/opt/ontop/sql/$dir" -schemas="$dir" migrate
     fi 
 done
 
