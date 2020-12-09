@@ -80,6 +80,7 @@ pipeline {
                     echo "FLYWAY_PLACEHOLDERS_TOURISM_PASSWORD=${FLYWAY_PLACEHOLDERS_TOURISM_PASSWORD}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_TOURISM_SUBSCRIPTION_NAME=${FLYWAY_PLACEHOLDERS_TOURISM_SUBSCRIPTION_NAME}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_TOURISM_PUBLICATION_NAME=${FLYWAY_PLACEHOLDERS_TOURISM_PUBLICATION_NAME}" >> .env
+                    echo "FLYWAY_PLACEHOLDERS_TOURISM_SCHEMA_VKG=${FLYWAY_PLACEHOLDERS_TOURISM_SCHEMA_VKG}" >> .env
                     
                     echo "FLYWAY_PLACEHOLDERS_MOBILITY_DB=${FLYWAY_PLACEHOLDERS_MOBILITY_DB}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_MOBILITY_IP=${FLYWAY_PLACEHOLDERS_MOBILITY_IP}" >> .env
@@ -87,6 +88,7 @@ pipeline {
                     echo "FLYWAY_PLACEHOLDERS_MOBILITY_PASSWORD=${FLYWAY_PLACEHOLDERS_MOBILITY_PASSWORD}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_MOBILITY_SUBSCRIPTION_NAME=${FLYWAY_PLACEHOLDERS_MOBILITY_SUBSCRIPTION_NAME}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_MOBILITY_PUBLICATION_NAME=${FLYWAY_PLACEHOLDERS_MOBILITY_PUBLICATION_NAME}" >> .env
+                    echo "FLYWAY_PLACEHOLDERS_MOBILITY_SCHEMA_VKG=${FLYWAY_PLACEHOLDERS_MOBILITY_SCHEMA_VKG}" >> .env
 
                     sed -i -e "s%\\(jdbc.url\\s*=\\).*\\$%\\1jdbc\\\\\\\\:postgresql\\\\\\\\://${VKG_POSTGRES_HOST}/${VKG_POSTGRES_DB}%" vkg/odh.docker.properties
                     sed -i -e "s%\\(jdbc.user\\s*=\\).*\\$%\\1${VKG_POSTGRES_USER_READONLY}%" vkg/odh.docker.properties
