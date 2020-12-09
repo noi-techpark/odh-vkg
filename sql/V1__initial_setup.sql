@@ -1,38 +1,38 @@
 
 --
--- Tourism Database Schema Dump
+-- Database Schema Dump of 'prod-postgres-tourism-2.co90ybcr8iim.eu-west-1.rds.amazonaws.com/tourism/public'
 --
--- Please use the script infrastructure/utils/tourism-dump-schema.sh to update this dump
+-- Please use the script infrastructure/utils/originaldb-dump-schema.sh to update this dump
 --
 
-SELECT pg_catalog.set_config('search_path', '', false);
-CREATE TABLE public."AspNetRoles" (
+SELECT pg_catalog.set_config('search_path', '${tourism_schema_vkg}', false);
+CREATE TABLE "AspNetRoles" (
     "Id" character varying(128) NOT NULL,
     "Name" character varying(256) NOT NULL
 );
-CREATE TABLE public."AspNetUserClaims" (
+CREATE TABLE "AspNetUserClaims" (
     "Id" integer NOT NULL,
     "ClaimType" character varying(256),
     "ClaimValue" character varying(256),
     "UserId" character varying(128) NOT NULL
 );
-CREATE SEQUENCE public."AspNetUserClaims_Id_seq"
+CREATE SEQUENCE "AspNetUserClaims_Id_seq"
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-ALTER SEQUENCE public."AspNetUserClaims_Id_seq" OWNED BY public."AspNetUserClaims"."Id";
-CREATE TABLE public."AspNetUserLogins" (
+ALTER SEQUENCE "AspNetUserClaims_Id_seq" OWNED BY "AspNetUserClaims"."Id";
+CREATE TABLE "AspNetUserLogins" (
     "UserId" character varying(128) NOT NULL,
     "LoginProvider" character varying(128) NOT NULL,
     "ProviderKey" character varying(128) NOT NULL
 );
-CREATE TABLE public."AspNetUserRoles" (
+CREATE TABLE "AspNetUserRoles" (
     "UserId" character varying(128) NOT NULL,
     "RoleId" character varying(128) NOT NULL
 );
-CREATE TABLE public."AspNetUsers" (
+CREATE TABLE "AspNetUsers" (
     "Id" character varying(128) NOT NULL,
     "UserName" character varying(256) NOT NULL,
     "PasswordHash" character varying(256),
@@ -40,96 +40,87 @@ CREATE TABLE public."AspNetUsers" (
     "Email" character varying(256) DEFAULT NULL::character varying,
     "EmailConfirmed" boolean DEFAULT false NOT NULL
 );
-CREATE TABLE public.accommodationfeatures (
+CREATE TABLE accommodationfeatures (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.accommodationrooms (
+CREATE TABLE accommodationrooms (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.accommodationroomsopen (
+CREATE TABLE accommodationroomsopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.accommodations (
+CREATE TABLE accommodations (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.accommodationsopen (
+CREATE TABLE accommodationsopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.accommodationtypes (
+CREATE TABLE accommodationtypes (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.accothemesmobiles (
+CREATE TABLE accothemesmobiles (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.activities (
+CREATE TABLE activities (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.activitiesopen (
+CREATE TABLE activitiesopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.activitytypes (
+CREATE TABLE activitytypes (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.alpinebits (
+CREATE TABLE alpinebits (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.appmessages (
+CREATE TABLE appmessages (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.appsuggestions (
+CREATE TABLE appsuggestions (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.areas (
+CREATE TABLE areas (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.articles (
+CREATE TABLE articles (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.articlesopen (
+CREATE TABLE articlesopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.articletypes (
+CREATE TABLE articletypes (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.districts (
+CREATE TABLE districts (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.districtsopen (
+CREATE TABLE districtsopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.eventeuracnoi (
+CREATE TABLE eventeuracnoi (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.events (
-    id character varying(50) NOT NULL,
-    data jsonb,
-    latitude double precision,
-    longitude double precision,
-    begindate timestamp without time zone,
-    enddate timestamp without time zone,
-    nextbegindate timestamp without time zone
-);
-CREATE TABLE public.eventsopen (
+CREATE TABLE events (
     id character varying(50) NOT NULL,
     data jsonb,
     latitude double precision,
@@ -138,361 +129,370 @@ CREATE TABLE public.eventsopen (
     enddate timestamp without time zone,
     nextbegindate timestamp without time zone
 );
-CREATE TABLE public.eventtypes (
+CREATE TABLE eventsopen (
+    id character varying(50) NOT NULL,
+    data jsonb,
+    latitude double precision,
+    longitude double precision,
+    begindate timestamp without time zone,
+    enddate timestamp without time zone,
+    nextbegindate timestamp without time zone
+);
+CREATE TABLE eventtypes (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.experienceareas (
+CREATE TABLE experienceareas (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.experienceareasopen (
+CREATE TABLE experienceareasopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.gastronomies (
+CREATE TABLE gastronomies (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.gastronomiesopen (
+CREATE TABLE gastronomiesopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.gastronomytypes (
+CREATE TABLE gastronomytypes (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.ltstaggingtypes (
+CREATE TABLE ltstaggingtypes (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.marketinggroups (
+CREATE TABLE marketinggroups (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.measuringpoints (
+CREATE TABLE measuringpoints (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.metaregions (
+CREATE TABLE metaregions (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.metaregionsopen (
+CREATE TABLE metaregionsopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.mobilehtmls (
+CREATE TABLE mobilehtmls (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.municipalities (
+CREATE TABLE municipalities (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.municipalitiesopen (
+CREATE TABLE municipalitiesopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.natureparks (
+CREATE TABLE natureparks (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.odhactivitypoimetainfos (
+CREATE TABLE odhactivitypoimetainfos (
     id character varying(100) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.packages (
+CREATE TABLE packages (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.pois (
+CREATE TABLE pois (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.poisopen (
+CREATE TABLE poisopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.poitypes (
+CREATE TABLE poitypes (
     id character varying(100) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.regions (
+CREATE TABLE regions (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.regionsopen (
+CREATE TABLE regionsopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.skiareas (
+CREATE TABLE skiareas (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.skiareasopen (
+CREATE TABLE skiareasopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.skiregions (
+CREATE TABLE skiregions (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.skiregionsopen (
+CREATE TABLE skiregionsopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.smgpois (
+CREATE TABLE smgpois (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.smgpoismobilefilters (
+CREATE TABLE smgpoismobilefilters (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.smgpoismobiletypes (
+CREATE TABLE smgpoismobiletypes (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.smgpoisopen (
+CREATE TABLE smgpoisopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.smgpoitypes (
+CREATE TABLE smgpoitypes (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.smgtags (
+CREATE TABLE smgtags (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.suedtiroltypes (
+CREATE TABLE suedtiroltypes (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.tripplaners (
+CREATE TABLE tripplaners (
     id character varying(100) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.tutorials (
+CREATE TABLE tutorials (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.tvs (
+CREATE TABLE tvs (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.tvsopen (
+CREATE TABLE tvsopen (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.userdevices (
+CREATE TABLE userdevices (
     id character varying(100) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.users (
+CREATE TABLE users (
     id character varying(100) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.venues (
+CREATE TABLE venues (
     id character varying(100) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.venuesopen (
+CREATE TABLE venuesopen (
     id character varying(100) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.venuetypes (
+CREATE TABLE venuetypes (
     id character varying(100) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.webcams (
+CREATE TABLE webcams (
     id character varying(50) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.webcamsopen (
+CREATE TABLE webcamsopen (
     id character varying(100) NOT NULL,
     data jsonb
 );
-CREATE TABLE public.wines (
+CREATE TABLE wines (
     id character varying(50) NOT NULL,
     data jsonb
 );
-ALTER TABLE ONLY public."AspNetUserClaims" ALTER COLUMN "Id" SET DEFAULT nextval('public."AspNetUserClaims_Id_seq"'::regclass);
-ALTER TABLE ONLY public."AspNetRoles"
+ALTER TABLE ONLY "AspNetUserClaims" ALTER COLUMN "Id" SET DEFAULT nextval('"AspNetUserClaims_Id_seq"'::regclass);
+ALTER TABLE ONLY "AspNetRoles"
     ADD CONSTRAINT "AspNetRoles_pkey" PRIMARY KEY ("Id");
-ALTER TABLE ONLY public."AspNetUserClaims"
+ALTER TABLE ONLY "AspNetUserClaims"
     ADD CONSTRAINT "AspNetUserClaims_pkey" PRIMARY KEY ("Id");
-ALTER TABLE ONLY public."AspNetUserLogins"
+ALTER TABLE ONLY "AspNetUserLogins"
     ADD CONSTRAINT "AspNetUserLogins_pkey" PRIMARY KEY ("UserId", "LoginProvider", "ProviderKey");
-ALTER TABLE ONLY public."AspNetUserRoles"
+ALTER TABLE ONLY "AspNetUserRoles"
     ADD CONSTRAINT "AspNetUserRoles_pkey" PRIMARY KEY ("UserId", "RoleId");
-ALTER TABLE ONLY public."AspNetUsers"
+ALTER TABLE ONLY "AspNetUsers"
     ADD CONSTRAINT "AspNetUsers_pkey" PRIMARY KEY ("Id");
-ALTER TABLE ONLY public.accommodationfeatures
+ALTER TABLE ONLY accommodationfeatures
     ADD CONSTRAINT accommodationfeatures_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.accommodationrooms
+ALTER TABLE ONLY accommodationrooms
     ADD CONSTRAINT accommodationrooms_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.accommodationroomsopen
+ALTER TABLE ONLY accommodationroomsopen
     ADD CONSTRAINT accommodationroomsopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.accommodations
+ALTER TABLE ONLY accommodations
     ADD CONSTRAINT accommodations_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.accommodationsopen
+ALTER TABLE ONLY accommodationsopen
     ADD CONSTRAINT accommodationsopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.accommodationtypes
+ALTER TABLE ONLY accommodationtypes
     ADD CONSTRAINT accommodationtypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.accothemesmobiles
+ALTER TABLE ONLY accothemesmobiles
     ADD CONSTRAINT accothemesmobiles_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.activities
+ALTER TABLE ONLY activities
     ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.activitiesopen
+ALTER TABLE ONLY activitiesopen
     ADD CONSTRAINT activitiesopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.activitytypes
+ALTER TABLE ONLY activitytypes
     ADD CONSTRAINT activitytypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.alpinebits
+ALTER TABLE ONLY alpinebits
     ADD CONSTRAINT alpinebits_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.appmessages
+ALTER TABLE ONLY appmessages
     ADD CONSTRAINT appmessages_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.appsuggestions
+ALTER TABLE ONLY appsuggestions
     ADD CONSTRAINT appsuggestions_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.areas
+ALTER TABLE ONLY areas
     ADD CONSTRAINT areas_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.articles
+ALTER TABLE ONLY articles
     ADD CONSTRAINT articles_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.articlesopen
+ALTER TABLE ONLY articlesopen
     ADD CONSTRAINT articlesopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.articletypes
+ALTER TABLE ONLY articletypes
     ADD CONSTRAINT articletypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.districts
+ALTER TABLE ONLY districts
     ADD CONSTRAINT districts_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.districtsopen
+ALTER TABLE ONLY districtsopen
     ADD CONSTRAINT districtsopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.eventeuracnoi
+ALTER TABLE ONLY eventeuracnoi
     ADD CONSTRAINT eventeuracnoi_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.events
+ALTER TABLE ONLY events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.eventsopen
+ALTER TABLE ONLY eventsopen
     ADD CONSTRAINT eventsopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.eventtypes
+ALTER TABLE ONLY eventtypes
     ADD CONSTRAINT eventtypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.experienceareas
+ALTER TABLE ONLY experienceareas
     ADD CONSTRAINT experienceareas_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.experienceareasopen
+ALTER TABLE ONLY experienceareasopen
     ADD CONSTRAINT experienceareasopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.gastronomies
+ALTER TABLE ONLY gastronomies
     ADD CONSTRAINT gastronomies_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.gastronomiesopen
+ALTER TABLE ONLY gastronomiesopen
     ADD CONSTRAINT gastronomiesopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.gastronomytypes
+ALTER TABLE ONLY gastronomytypes
     ADD CONSTRAINT gastronomytypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.ltstaggingtypes
+ALTER TABLE ONLY ltstaggingtypes
     ADD CONSTRAINT ltstaggingtypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.marketinggroups
+ALTER TABLE ONLY marketinggroups
     ADD CONSTRAINT marketinggroups_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.measuringpoints
+ALTER TABLE ONLY measuringpoints
     ADD CONSTRAINT measuringpoints_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.metaregions
+ALTER TABLE ONLY metaregions
     ADD CONSTRAINT metaregions_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.metaregionsopen
+ALTER TABLE ONLY metaregionsopen
     ADD CONSTRAINT metaregionsopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.mobilehtmls
+ALTER TABLE ONLY mobilehtmls
     ADD CONSTRAINT mobilehtmls_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.municipalities
+ALTER TABLE ONLY municipalities
     ADD CONSTRAINT municipalities_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.municipalitiesopen
+ALTER TABLE ONLY municipalitiesopen
     ADD CONSTRAINT municipalitiesopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.natureparks
+ALTER TABLE ONLY natureparks
     ADD CONSTRAINT natureparks_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.odhactivitypoimetainfos
+ALTER TABLE ONLY odhactivitypoimetainfos
     ADD CONSTRAINT odhactivitypoimetainfos_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.packages
+ALTER TABLE ONLY packages
     ADD CONSTRAINT packages_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.pois
+ALTER TABLE ONLY pois
     ADD CONSTRAINT pois_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.poisopen
+ALTER TABLE ONLY poisopen
     ADD CONSTRAINT poisopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.poitypes
+ALTER TABLE ONLY poitypes
     ADD CONSTRAINT poitypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.regions
+ALTER TABLE ONLY regions
     ADD CONSTRAINT regions_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.regionsopen
+ALTER TABLE ONLY regionsopen
     ADD CONSTRAINT regionsopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.skiareas
+ALTER TABLE ONLY skiareas
     ADD CONSTRAINT skiareas_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.skiareasopen
+ALTER TABLE ONLY skiareasopen
     ADD CONSTRAINT skiareasopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.skiregions
+ALTER TABLE ONLY skiregions
     ADD CONSTRAINT skiregions_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.skiregionsopen
+ALTER TABLE ONLY skiregionsopen
     ADD CONSTRAINT skiregionsopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.smgpois
+ALTER TABLE ONLY smgpois
     ADD CONSTRAINT smgpois_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.smgpoismobilefilters
+ALTER TABLE ONLY smgpoismobilefilters
     ADD CONSTRAINT smgpoismobilefilters_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.smgpoismobiletypes
+ALTER TABLE ONLY smgpoismobiletypes
     ADD CONSTRAINT smgpoismobiletypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.smgpoisopen
+ALTER TABLE ONLY smgpoisopen
     ADD CONSTRAINT smgpoisopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.smgpoitypes
+ALTER TABLE ONLY smgpoitypes
     ADD CONSTRAINT smgpoitypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.smgtags
+ALTER TABLE ONLY smgtags
     ADD CONSTRAINT smgtags_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.suedtiroltypes
+ALTER TABLE ONLY suedtiroltypes
     ADD CONSTRAINT suedtiroltypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.tripplaners
+ALTER TABLE ONLY tripplaners
     ADD CONSTRAINT tripplaners_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.tutorials
+ALTER TABLE ONLY tutorials
     ADD CONSTRAINT tutorials_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.tvs
+ALTER TABLE ONLY tvs
     ADD CONSTRAINT tvs_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.tvsopen
+ALTER TABLE ONLY tvsopen
     ADD CONSTRAINT tvsopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.userdevices
+ALTER TABLE ONLY userdevices
     ADD CONSTRAINT userdevices_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.users
+ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.venues
+ALTER TABLE ONLY venues
     ADD CONSTRAINT venues_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.venuesopen
+ALTER TABLE ONLY venuesopen
     ADD CONSTRAINT venuesopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.venuetypes
+ALTER TABLE ONLY venuetypes
     ADD CONSTRAINT venuetypes_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.webcams
+ALTER TABLE ONLY webcams
     ADD CONSTRAINT webcams_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.webcamsopen
+ALTER TABLE ONLY webcamsopen
     ADD CONSTRAINT webcamsopen_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.wines
+ALTER TABLE ONLY wines
     ADD CONSTRAINT wines_pkey PRIMARY KEY (id);
-CREATE INDEX "IX_AspNetUserClaims_UserId" ON public."AspNetUserClaims" USING btree ("UserId");
-CREATE INDEX "IX_AspNetUserLogins_UserId" ON public."AspNetUserLogins" USING btree ("UserId");
-CREATE INDEX "IX_AspNetUserRoles_RoleId" ON public."AspNetUserRoles" USING btree ("RoleId");
-CREATE INDEX "IX_AspNetUserRoles_UserId" ON public."AspNetUserRoles" USING btree ("UserId");
-CREATE INDEX accoopenshortnamebtreeix ON public.accommodationsopen USING btree (((data ->> 'Shortname'::text)));
-CREATE INDEX accoroomsa0ridbtreeix ON public.accommodationrooms USING btree (((data ->> 'A0RID'::text)));
-CREATE INDEX accoroomsopena0ridbtreeix ON public.accommodationroomsopen USING btree (((data ->> 'A0RID'::text)));
-CREATE INDEX accosginix ON public.accommodations USING gin (data);
-CREATE INDEX accoshortnamebtreeix ON public.accommodations USING btree (((data ->> 'Shortname'::text)));
-CREATE INDEX accosopenginix ON public.accommodationsopen USING gin (data);
-CREATE INDEX activitiesginix ON public.activities USING gin (data);
-CREATE INDEX activitiesopenginix ON public.activitiesopen USING gin (data);
-CREATE INDEX articlesginix ON public.articles USING gin (data);
-CREATE INDEX articlesopenginix ON public.articlesopen USING gin (data);
-CREATE INDEX eventeuracnoiginix ON public.eventeuracnoi USING gin (data);
-CREATE INDEX eventsginix ON public.events USING gin (data);
-CREATE INDEX eventsopenginix ON public.eventsopen USING gin (data);
-CREATE INDEX gastronomiesginix ON public.gastronomies USING gin (data);
-CREATE INDEX gastronomiesopenginix ON public.gastronomiesopen USING gin (data);
-CREATE INDEX packagesginix ON public.packages USING gin (data);
-CREATE INDEX poisginix ON public.pois USING gin (data);
-CREATE INDEX poisopenginix ON public.poisopen USING gin (data);
-CREATE INDEX smgpoiopensginix ON public.smgpoisopen USING gin (data);
-CREATE INDEX smgpoisginix ON public.smgpois USING gin (data);
-CREATE INDEX smgtagsginix ON public.smgtags USING gin (data);
-ALTER TABLE ONLY public."AspNetUserClaims"
-    ADD CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_User_Id" FOREIGN KEY ("UserId") REFERENCES public."AspNetUsers"("Id") ON DELETE CASCADE;
-ALTER TABLE ONLY public."AspNetUserLogins"
-    ADD CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES public."AspNetUsers"("Id") ON DELETE CASCADE;
-ALTER TABLE ONLY public."AspNetUserRoles"
-    ADD CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES public."AspNetRoles"("Id") ON DELETE CASCADE;
-ALTER TABLE ONLY public."AspNetUserRoles"
-    ADD CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES public."AspNetUsers"("Id") ON DELETE CASCADE;
+CREATE INDEX "IX_AspNetUserClaims_UserId" ON "AspNetUserClaims" USING btree ("UserId");
+CREATE INDEX "IX_AspNetUserLogins_UserId" ON "AspNetUserLogins" USING btree ("UserId");
+CREATE INDEX "IX_AspNetUserRoles_RoleId" ON "AspNetUserRoles" USING btree ("RoleId");
+CREATE INDEX "IX_AspNetUserRoles_UserId" ON "AspNetUserRoles" USING btree ("UserId");
+CREATE INDEX accoopenshortnamebtreeix ON accommodationsopen USING btree (((data ->> 'Shortname'::text)));
+CREATE INDEX accoroomsa0ridbtreeix ON accommodationrooms USING btree (((data ->> 'A0RID'::text)));
+CREATE INDEX accoroomsopena0ridbtreeix ON accommodationroomsopen USING btree (((data ->> 'A0RID'::text)));
+CREATE INDEX accosginix ON accommodations USING gin (data);
+CREATE INDEX accoshortnamebtreeix ON accommodations USING btree (((data ->> 'Shortname'::text)));
+CREATE INDEX accosopenginix ON accommodationsopen USING gin (data);
+CREATE INDEX activitiesginix ON activities USING gin (data);
+CREATE INDEX activitiesopenginix ON activitiesopen USING gin (data);
+CREATE INDEX articlesginix ON articles USING gin (data);
+CREATE INDEX articlesopenginix ON articlesopen USING gin (data);
+CREATE INDEX eventeuracnoiginix ON eventeuracnoi USING gin (data);
+CREATE INDEX eventsginix ON events USING gin (data);
+CREATE INDEX eventsopenginix ON eventsopen USING gin (data);
+CREATE INDEX gastronomiesginix ON gastronomies USING gin (data);
+CREATE INDEX gastronomiesopenginix ON gastronomiesopen USING gin (data);
+CREATE INDEX packagesginix ON packages USING gin (data);
+CREATE INDEX poisginix ON pois USING gin (data);
+CREATE INDEX poisopenginix ON poisopen USING gin (data);
+CREATE INDEX smgpoiopensginix ON smgpoisopen USING gin (data);
+CREATE INDEX smgpoisginix ON smgpois USING gin (data);
+CREATE INDEX smgtagsginix ON smgtags USING gin (data);
+ALTER TABLE ONLY "AspNetUserClaims"
+    ADD CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_User_Id" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers"("Id") ON DELETE CASCADE;
+ALTER TABLE ONLY "AspNetUserLogins"
+    ADD CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers"("Id") ON DELETE CASCADE;
+ALTER TABLE ONLY "AspNetUserRoles"
+    ADD CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles"("Id") ON DELETE CASCADE;
+ALTER TABLE ONLY "AspNetUserRoles"
+    ADD CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers"("Id") ON DELETE CASCADE;
