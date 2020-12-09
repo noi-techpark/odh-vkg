@@ -3,9 +3,10 @@
 set -xeo pipefail
 
 echo "### Entrypoint - Run Flyway Migrations"
-for dir in /opt/ontop/sql/*; do
-    if [ -d "$dir" ]; then
-        echo "# Migrating schema in directory '$dir'."
+for file in /opt/ontop/sql/*; do
+    if [ -d "$file" ]; then
+        dir=$(basename "$file")
+        echo "# Migrating schema '$dir'."
         /usr/local/bin/flyway -locations=filesystem:"/opt/ontop/sql/$dir" -schemas="$dir" migrate
     fi 
 done
