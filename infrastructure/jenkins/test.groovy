@@ -10,19 +10,9 @@ pipeline {
         SERVER_PORT = "1008"
         ONTOP_QUERY_TIMEOUT = 15
 
-        /*
-         * LOGICAL REPLICATION CONFIGURATION 
-         *
-         * We use IP addresses, because the DNS lookup might not always work or
-         * take too long and thus we get timeouts.
-         *
-         * NB: Do not forget to update sql/R__read_only_permissions.sql and all
-         * search_paths inside sql/, if you add new replications.
-         */
-
         // TOURISM TEST DB
         FLYWAY_PLACEHOLDERS_TOURISM_DB = "tourism"
-        FLYWAY_PLACEHOLDERS_TOURISM_IP = "52.210.97.235"
+        FLYWAY_PLACEHOLDERS_TOURISM_HOST = "52.210.97.235"
         FLYWAY_PLACEHOLDERS_TOURISM_USER = "vkgreplicate"
         FLYWAY_PLACEHOLDERS_TOURISM_PASSWORD = credentials('it.bz.opendatahub.sparql.db.tourism.password')
         FLYWAY_PLACEHOLDERS_TOURISM_PUBLICATION_NAME = "vkgpublication"
@@ -31,7 +21,7 @@ pipeline {
 
         // MOBILITY TEST DB
         FLYWAY_PLACEHOLDERS_MOBILITY_DB = "bdp"
-        FLYWAY_PLACEHOLDERS_MOBILITY_IP = "99.81.24.228"
+        FLYWAY_PLACEHOLDERS_MOBILITY_HOST = "99.81.24.228"
         FLYWAY_PLACEHOLDERS_MOBILITY_USER = "vkgreplicate"
         FLYWAY_PLACEHOLDERS_MOBILITY_PASSWORD = credentials('it.bz.opendatahub.sparql.db.mobility.password')
         FLYWAY_PLACEHOLDERS_MOBILITY_PUBLICATION_NAME = "vkgpublication"
@@ -75,7 +65,7 @@ pipeline {
                     echo "FLYWAY_PLACEHOLDERS_VKG_USER_READONLY=${FLYWAY_PLACEHOLDERS_VKG_USER_READONLY}" >> .env
 
                     echo "FLYWAY_PLACEHOLDERS_TOURISM_DB=${FLYWAY_PLACEHOLDERS_TOURISM_DB}" >> .env
-                    echo "FLYWAY_PLACEHOLDERS_TOURISM_IP=${FLYWAY_PLACEHOLDERS_TOURISM_IP}" >> .env
+                    echo "FLYWAY_PLACEHOLDERS_TOURISM_HOST=${FLYWAY_PLACEHOLDERS_TOURISM_HOST}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_TOURISM_USER=${FLYWAY_PLACEHOLDERS_TOURISM_USER}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_TOURISM_PASSWORD=${FLYWAY_PLACEHOLDERS_TOURISM_PASSWORD}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_TOURISM_SUBSCRIPTION_NAME=${FLYWAY_PLACEHOLDERS_TOURISM_SUBSCRIPTION_NAME}" >> .env
@@ -83,7 +73,7 @@ pipeline {
                     echo "FLYWAY_PLACEHOLDERS_TOURISM_SCHEMA_VKG=${FLYWAY_PLACEHOLDERS_TOURISM_SCHEMA_VKG}" >> .env
                     
                     echo "FLYWAY_PLACEHOLDERS_MOBILITY_DB=${FLYWAY_PLACEHOLDERS_MOBILITY_DB}" >> .env
-                    echo "FLYWAY_PLACEHOLDERS_MOBILITY_IP=${FLYWAY_PLACEHOLDERS_MOBILITY_IP}" >> .env
+                    echo "FLYWAY_PLACEHOLDERS_MOBILITY_HOST=${FLYWAY_PLACEHOLDERS_MOBILITY_HOST}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_MOBILITY_USER=${FLYWAY_PLACEHOLDERS_MOBILITY_USER}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_MOBILITY_PASSWORD=${FLYWAY_PLACEHOLDERS_MOBILITY_PASSWORD}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_MOBILITY_SUBSCRIPTION_NAME=${FLYWAY_PLACEHOLDERS_MOBILITY_SUBSCRIPTION_NAME}" >> .env

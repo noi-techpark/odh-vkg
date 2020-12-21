@@ -76,7 +76,7 @@ Rules](https://github.com/noi-techpark/documentation/blob/master/FLIGHTRULES.md#
 
 #### Users
 
-We need a superuser `vkguser`, that will run all our Flayway scripts. This
+We need a superuser `vkguser`, that will run all our Flyway scripts. This
 example is about the `tourism_test` replication, but it will be similar for all
 other replications.
 

@@ -12,7 +12,7 @@ pipeline {
 
         // We use the IP now, because the lookup of "prod-postgres-tourism-2.co90ybcr8iim.eu-west-1.rds.amazonaws.com"
         // might not always work or take too long and thus we get timeouts.
-        ORIGINAL_POSTGRES_HOST_IP = "52.210.97.235"
+        ORIGINAL_POSTGRES_HOST = "52.210.97.235"
         ORIGINAL_POSTGRES_DB = "tourism"
         ORIGINAL_POSTGRES_USER = "vkgreplicate"
         ORIGINAL_POSTGRES_PASSWORD = credentials('it.bz.opendatahub.sparql.db.tourism.password')
@@ -26,7 +26,7 @@ pipeline {
         FLYWAY_URL = "jdbc:postgresql://${COPY_POSTGRES_HOST}/${COPY_POSTGRES_DB}"
         FLYWAY_USER = "${COPY_POSTGRES_USER}"
         FLYWAY_PASSWORD = "${COPY_POSTGRES_PASSWORD}"
-        FLYWAY_PLACEHOLDERS_ORIGINAL_HOST_IP = "${ORIGINAL_POSTGRES_HOST_IP}"
+        FLYWAY_PLACEHOLDERS_ORIGINAL_HOST = "${ORIGINAL_POSTGRES_HOST}"
         FLYWAY_PLACEHOLDERS_ORIGINAL_DB = "${ORIGINAL_POSTGRES_DB}"
         FLYWAY_PLACEHOLDERS_ORIGINAL_USER = "${ORIGINAL_POSTGRES_USER}"
         FLYWAY_PLACEHOLDERS_ORIGINAL_PASSWORD = "${ORIGINAL_POSTGRES_PASSWORD}"
@@ -55,7 +55,7 @@ pipeline {
                     echo "FLYWAY_URL=${FLYWAY_URL}" >> .env
                     echo "FLYWAY_USER=${FLYWAY_USER}" >> .env
                     echo "FLYWAY_PASSWORD=${FLYWAY_PASSWORD}" >> .env
-                    echo "FLYWAY_PLACEHOLDERS_ORIGINAL_HOST_IP=${FLYWAY_PLACEHOLDERS_ORIGINAL_HOST_IP}" >> .env
+                    echo "FLYWAY_PLACEHOLDERS_ORIGINAL_HOST=${FLYWAY_PLACEHOLDERS_ORIGINAL_HOST}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_ORIGINAL_DB=${FLYWAY_PLACEHOLDERS_ORIGINAL_DB}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_ORIGINAL_USER=${FLYWAY_PLACEHOLDERS_ORIGINAL_USER}" >> .env
                     echo "FLYWAY_PLACEHOLDERS_ORIGINAL_PASSWORD=${FLYWAY_PLACEHOLDERS_ORIGINAL_PASSWORD}" >> .env
