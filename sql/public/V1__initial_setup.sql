@@ -6,40 +6,6 @@
 --
 
 SELECT pg_catalog.set_config('search_path', '${tourism_schema_vkg}', false);
-CREATE TABLE "AspNetRoles" (
-    "Id" character varying(128) NOT NULL,
-    "Name" character varying(256) NOT NULL
-);
-CREATE TABLE "AspNetUserClaims" (
-    "Id" integer NOT NULL,
-    "ClaimType" character varying(256),
-    "ClaimValue" character varying(256),
-    "UserId" character varying(128) NOT NULL
-);
-CREATE SEQUENCE "AspNetUserClaims_Id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-ALTER SEQUENCE "AspNetUserClaims_Id_seq" OWNED BY "AspNetUserClaims"."Id";
-CREATE TABLE "AspNetUserLogins" (
-    "UserId" character varying(128) NOT NULL,
-    "LoginProvider" character varying(128) NOT NULL,
-    "ProviderKey" character varying(128) NOT NULL
-);
-CREATE TABLE "AspNetUserRoles" (
-    "UserId" character varying(128) NOT NULL,
-    "RoleId" character varying(128) NOT NULL
-);
-CREATE TABLE "AspNetUsers" (
-    "Id" character varying(128) NOT NULL,
-    "UserName" character varying(256) NOT NULL,
-    "PasswordHash" character varying(256),
-    "SecurityStamp" character varying(256),
-    "Email" character varying(256) DEFAULT NULL::character varying,
-    "EmailConfirmed" boolean DEFAULT false NOT NULL
-);
 CREATE TABLE accommodationfeatures (
     id character varying(50) NOT NULL,
     data jsonb
@@ -318,17 +284,6 @@ CREATE TABLE wines (
     id character varying(50) NOT NULL,
     data jsonb
 );
-ALTER TABLE ONLY "AspNetUserClaims" ALTER COLUMN "Id" SET DEFAULT nextval('"AspNetUserClaims_Id_seq"'::regclass);
-ALTER TABLE ONLY "AspNetRoles"
-    ADD CONSTRAINT "AspNetRoles_pkey" PRIMARY KEY ("Id");
-ALTER TABLE ONLY "AspNetUserClaims"
-    ADD CONSTRAINT "AspNetUserClaims_pkey" PRIMARY KEY ("Id");
-ALTER TABLE ONLY "AspNetUserLogins"
-    ADD CONSTRAINT "AspNetUserLogins_pkey" PRIMARY KEY ("UserId", "LoginProvider", "ProviderKey");
-ALTER TABLE ONLY "AspNetUserRoles"
-    ADD CONSTRAINT "AspNetUserRoles_pkey" PRIMARY KEY ("UserId", "RoleId");
-ALTER TABLE ONLY "AspNetUsers"
-    ADD CONSTRAINT "AspNetUsers_pkey" PRIMARY KEY ("Id");
 ALTER TABLE ONLY accommodationfeatures
     ADD CONSTRAINT accommodationfeatures_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY accommodationrooms
@@ -463,10 +418,6 @@ ALTER TABLE ONLY webcamsopen
     ADD CONSTRAINT webcamsopen_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY wines
     ADD CONSTRAINT wines_pkey PRIMARY KEY (id);
-CREATE INDEX "IX_AspNetUserClaims_UserId" ON "AspNetUserClaims" USING btree ("UserId");
-CREATE INDEX "IX_AspNetUserLogins_UserId" ON "AspNetUserLogins" USING btree ("UserId");
-CREATE INDEX "IX_AspNetUserRoles_RoleId" ON "AspNetUserRoles" USING btree ("RoleId");
-CREATE INDEX "IX_AspNetUserRoles_UserId" ON "AspNetUserRoles" USING btree ("UserId");
 CREATE INDEX accoopenshortnamebtreeix ON accommodationsopen USING btree (((data ->> 'Shortname'::text)));
 CREATE INDEX accoroomsa0ridbtreeix ON accommodationrooms USING btree (((data ->> 'A0RID'::text)));
 CREATE INDEX accoroomsopena0ridbtreeix ON accommodationroomsopen USING btree (((data ->> 'A0RID'::text)));
@@ -488,11 +439,3 @@ CREATE INDEX poisopenginix ON poisopen USING gin (data);
 CREATE INDEX smgpoiopensginix ON smgpoisopen USING gin (data);
 CREATE INDEX smgpoisginix ON smgpois USING gin (data);
 CREATE INDEX smgtagsginix ON smgtags USING gin (data);
-ALTER TABLE ONLY "AspNetUserClaims"
-    ADD CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_User_Id" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers"("Id") ON DELETE CASCADE;
-ALTER TABLE ONLY "AspNetUserLogins"
-    ADD CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers"("Id") ON DELETE CASCADE;
-ALTER TABLE ONLY "AspNetUserRoles"
-    ADD CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles"("Id") ON DELETE CASCADE;
-ALTER TABLE ONLY "AspNetUserRoles"
-    ADD CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers"("Id") ON DELETE CASCADE;
