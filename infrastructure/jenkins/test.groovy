@@ -6,13 +6,14 @@ pipeline {
         DOCKER_IMAGE_ONTOP = "755952719952.dkr.ecr.eu-west-1.amazonaws.com/odh-vkg-ontop"
         DOCKER_IMAGE_NGINX = "755952719952.dkr.ecr.eu-west-1.amazonaws.com/odh-vkg-nginx"
         DOCKER_TAG = "test-$BUILD_NUMBER"
+		ANSIBLE_LIMIT = "test"
 
         SERVER_PORT = "1008"
         ONTOP_QUERY_TIMEOUT = 15
 
         // TOURISM TEST DB
         FLYWAY_PLACEHOLDERS_TOURISM_DB = "tourism"
-        FLYWAY_PLACEHOLDERS_TOURISM_HOST = "52.210.97.235"
+        FLYWAY_PLACEHOLDERS_TOURISM_HOST = "prod-postgres-tourism-2.co90ybcr8iim.eu-west-1.rds.amazonaws.com"
         FLYWAY_PLACEHOLDERS_TOURISM_USER = "vkgreplicate"
         FLYWAY_PLACEHOLDERS_TOURISM_PASSWORD = credentials('it.bz.opendatahub.sparql.db.tourism.password')
         FLYWAY_PLACEHOLDERS_TOURISM_PUBLICATION_NAME = "vkgpublication"
@@ -21,7 +22,7 @@ pipeline {
 
         // MOBILITY TEST DB
         FLYWAY_PLACEHOLDERS_MOBILITY_DB = "bdp"
-        FLYWAY_PLACEHOLDERS_MOBILITY_HOST = "99.81.24.228"
+        FLYWAY_PLACEHOLDERS_MOBILITY_HOST = "test-pg-bdp.co90ybcr8iim.eu-west-1.rds.amazonaws.com"
         FLYWAY_PLACEHOLDERS_MOBILITY_USER = "vkgreplicate"
         FLYWAY_PLACEHOLDERS_MOBILITY_PASSWORD = credentials('it.bz.opendatahub.sparql.db.mobility.password')
         FLYWAY_PLACEHOLDERS_MOBILITY_PUBLICATION_NAME = "vkgpublication"
@@ -100,8 +101,9 @@ pipeline {
             steps {
                sshagent(['jenkins-ssh-key']) {
                     sh """
-                        (cd infrastructure/ansible && ansible-galaxy install -f -r requirements.yml)
-                        (cd infrastructure/ansible && ansible-playbook --limit=test deploy.yml --extra-vars "release_name=${BUILD_NUMBER}")
+                        cd infrastructure/ansible
+						ansible-galaxy install -f -r requirements.yml
+                        ansible-playbook --limit=${ANSIBLE_LIMIT} deploy.yml --extra-vars "release_name=${BUILD_NUMBER}"
                     """
                 }
             }
